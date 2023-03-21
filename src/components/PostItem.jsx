@@ -6,8 +6,11 @@ const PostItem = (props) => {
         <div>
             <div className="post">
                 <div className="post__content">
-                    <strong>JavaScript 1</strong>
-                    <div>Description</div>
+                    <strong>
+                        {props.post.title}
+                        {props.post.id}
+                    </strong>
+                    <div>{props.post.body}</div>
                 </div>
                 <div className="post__btn">
                     <button>Удалить</button>
