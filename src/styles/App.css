@@ -1,0 +1,19 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+#root {
+    display: flex;
+    justify-content: center;
+}
+.post {
+    margin: 40px 0;
+    width: 800px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid rgb(44, 195, 209);
+    padding: 15px 25px;
+}
+
