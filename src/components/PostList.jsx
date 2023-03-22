@@ -8,8 +8,8 @@ const PostList = ({ almira, sagynbek }) => {
             <h1 style={{ textAlign: 'center', marginTop: '50px' }}>
                 {sagynbek}
             </h1>
-            {almira.map(post =>
-                <PostItem post={post} key={post.id} />
+            {almira.map((post, index) =>
+                <PostItem number={index + 1} post={post} key={post.id} />
             )}
         </div>
     );
