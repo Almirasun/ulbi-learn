@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import ClassCounter from "./components/ClassCounter";
 import Counter from "./components/Counter";
 import PostList from "./components/PostList";
@@ -14,10 +14,12 @@ const App = () => {
   ])
 
   const [title, setTitle] = useState('')
+  const bodyInputRef = useRef()
 
   const addNewPost = (e) => {
     e.preventDefault()
     console.log(title);
+    console.log(bodyInputRef.current.value);
   }
 
   return (
@@ -28,9 +30,14 @@ const App = () => {
           onChange={e => setTitle(e.target.value)}
           value={title}
           type="text"
-          placeholder="Название поста" 
+          placeholder="Название поста"
         />
-        <MyInput type="text" placeholder="Описание поста" />
+        {/* Неуправляемый компонент */}
+        <MyInput
+          ref={bodyInputRef}
+          type="text"
+          placeholder="Описание поста"
+        />
         <MyButton onClick={addNewPost}>Создать пост</MyButton>
       </form>
       <PostList almira={posts} sagynbek={'Посты про JS'} />
