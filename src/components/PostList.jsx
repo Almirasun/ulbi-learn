@@ -2,13 +2,13 @@ import React from 'react';
 import PostItem from "./PostItem";
 
 
-const PostList = ({ almira, sagynbek }) => {
+const PostList = ({ posts, title }) => {
     return (
         <div>
             <h1 style={{ textAlign: 'center', marginTop: '50px' }}>
-                {sagynbek}
+                {title}
             </h1>
-            {almira.map((post, index) =>
+            {posts.map((post, index) =>
                 <PostItem number={index + 1} post={post} key={post.id} />
             )}
         </div>
