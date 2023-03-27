@@ -1,7 +1,11 @@
 import React from 'react';
+import MyButton from './UI/button/MyButton';
 
 const PostItem = (props) => {
     console.log(props);
+
+    // document.getElementById('removeBtn').addEventListener('click', props.remove(props.post))
+
     return (
         <div>
             <div className="post">
@@ -13,7 +17,9 @@ const PostItem = (props) => {
                     <div>{props.post.body}</div>
                 </div>
                 <div className="post__btn">
-                    <button>Удалить</button>
+                    <MyButton id="removeBtn" onClick={() => props.remove(props.post)}>
+                        Удалить
+                    </MyButton>
                 </div>
             </div>
         </div>

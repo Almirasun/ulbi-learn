@@ -16,10 +16,15 @@ const App = () => {
     setPosts([...posts, newPost])
   }  
 
+  // Получаем post из дочернего компонента
+  const removePost = (post) => {
+    setPosts(posts.filter(p => p.id !== post.id)) // это проверка id`шников
+  }
+
   return (
     <div className="App">
       <PostForm create={createPost} />
-      <PostList posts={posts} title='Посты про JS' />
+      <PostList remove={removePost} posts={posts} title='Посты про JS' />
     </div>
   )
 }
