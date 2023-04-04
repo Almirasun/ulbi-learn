@@ -2,7 +2,7 @@ import React from 'react';
 import MyButton from './UI/button/MyButton';
 
 const PostItem = (props) => {
-    console.log(props);
+    // console.log(props);
 
     // document.getElementById('removeBtn').addEventListener('click', props.remove(props.post))
 
