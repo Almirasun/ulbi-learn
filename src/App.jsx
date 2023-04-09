@@ -10,8 +10,7 @@ import PostFilter from "./components/PostFilter";
 import MyModal from "./components/UI/MyModal/MyModal";
 import MyButton from "./components/UI/button/MyButton";
 import { usePosts } from "./components/hooks/usePosts";
-import axios from 'axios';
-
+import PostService from "./API/PostService";
 
 const App = () => {
 
@@ -34,8 +33,8 @@ const App = () => {
   }
 
   async function fetchPosts() {
-    const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
-    setPosts(response.data);
+    const posts = await PostService.getAll() // этот метод вернет список постов
+    setPosts(posts);
   }
 
   // Получаем post из дочернего компонента
