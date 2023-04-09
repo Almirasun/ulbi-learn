@@ -10,6 +10,7 @@ import PostFilter from "./components/PostFilter";
 import MyModal from "./components/UI/MyModal/MyModal";
 import MyButton from "./components/UI/button/MyButton";
 import { usePosts } from "./components/hooks/usePosts";
+import axios from 'axios';
 
 
 const App = () => {
@@ -28,6 +29,11 @@ const App = () => {
     setModal(false  )
   }
 
+  async function fetchPosts() {
+    const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
+    setPosts(response.data);
+  }
+
   // Получаем post из дочернего компонента
   const removePost = (post) => {
     setPosts(posts.filter(p => p.id !== post.id)) // это проверка id`шников
@@ -35,6 +41,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <button onClick={fetchPosts}>Get Posts</button>
       <MyButton style={{marginTop: 30}} onClick={() => setModal(true)}>
         Создать пользователя
       </MyButton>
