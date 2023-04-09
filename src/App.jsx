@@ -6,76 +6,47 @@ import PostList from "./components/PostList";
 import MySelect from "./components/UI/select/MySelect";
 import './styles/App.css'
 import MyInput from "./components/UI/input/MyInput";
+import PostFilter from "./components/PostFilter";
+import MyModal from "./components/UI/MyModal/MyModal";
+import MyButton from "./components/UI/button/MyButton";
+import { usePosts } from "./components/hooks/usePosts";
 
 
 const App = () => {
 
   const [posts, setPosts] = useState([
-    { id: 1, title: 'Aaa', body: 'Description 1' },
-    { id: 2, title: 'Bbb', body: 'Description 2' },
-    { id: 3, title: 'Ccc', body: 'Description 3' },
+    // { id: 1, title: 'Aaa', body: 'Description 1' },
+    // { id: 2, title: 'Bbb', body: 'Description 2' },
+    // { id: 3, title: 'Ccc', body: 'Description 3' },
   ])
-  const [selectedSort, setSelectedSort] = useState('')
-  const [searchQuery, setSearchQuery] = useState('')
-
-  function getSortedPosts() {
-    
-  }
-  
-  const sortedPosts = useMemo(() => {
-    console.log('Функция отработала!');
-    if(selectedSort) {
-      return [...posts].sort((a, b) => a[selectedSort].localeCompare(b[selectedSort]))
-    }
-    return posts
-  }, [selectedSort, posts])
-
-  const sortedAndSearchedPosts = useMemo(() => {
-    return sortedPosts.filter(post => post.title.includes(searchQuery))
-  }, [searchQuery, sortedPosts])
+  const [filter, setFilter] = useState({ sort: '', query: '' }) // отвечает за логику состировки компонента
+  const [modal, setModal] =  useState(false)
+  const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query)
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
-  }  
+    setModal(false  )
+  }
 
   // Получаем post из дочернего компонента
   const removePost = (post) => {
     setPosts(posts.filter(p => p.id !== post.id)) // это проверка id`шников
   }
 
-  const sortPosts = (sort) => {
-    setSelectedSort(sort)
-  }
-
   return (
     <div className="App">
-      <PostForm create={createPost} />
-      <hr style={{margin: '15px 0'}} />
-      <div>
-        <MyInput 
-          value={searchQuery}
-          onChange={e => setSearchQuery(e.target.value)}
-          placeholder={'Search...'}
-        />
-        <MySelect 
-          value={selectedSort}
-          onChange={sortPosts}
-          defaultValue={'Сортировка'} 
-          options={[
-            {value: 'title', name: 'По названию'},
-            {value: 'body', name: 'По описанию'},
-          ]}  
-        />
-      </div>
-
-      {/* Условная отрисовка */}
-      {sortedAndSearchedPosts.length !== 0
-        ? 
-        <PostList remove={removePost} posts={sortedAndSearchedPosts} title='Посты про JS' />
-        : 
-        <h1 style={{marginTop: '50px', textAlign: 'center'}}>Посты не были найдены...</h1>
-      }
-      
+      <MyButton style={{marginTop: 30}} onClick={() => setModal(true)}>
+        Создать пользователя
+      </MyButton>
+      <MyModal visible={modal} setVisible={setModal}>
+        <PostForm create={createPost} />
+      </MyModal>
+      <hr style={{ margin: '15px 0' }} />
+      <PostFilter
+        filter={filter}
+        setFilter={setFilter}
+      />
+      <PostList remove={removePost} posts={sortedAndSearchedPosts} title='Посты про JS' />
     </div>
   )
 }

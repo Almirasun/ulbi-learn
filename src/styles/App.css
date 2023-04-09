@@ -3,10 +3,12 @@
     margin: 0;
     box-sizing: border-box;
 }
+
 #root {
     display: flex;
     justify-content: center;
 }
+
 .post {
     margin: 40px 0;
     width: 800px;
@@ -17,3 +19,20 @@
     padding: 15px 25px;
 }
 
+.post-enter {
+    opacity: 0;
+}
+
+.post-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+}
+
+.post-exit {
+    opacity: 1;
+}
+
+.post-exit-active {
+    opacity: 0;
+    transition: opacity 500ms ease-in;
+}
